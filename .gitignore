@@ -1,0 +1,21 @@
+# Split-out staging (do not ship)
+split-out-TODO.md
+
+# Python
+__pycache__/
+*.pyc
+
+# BugCrowd sync (sensitive data)
+bugcrowd-sync/data/
+bugcrowd-sync/.state/
+bugcrowd-sync/.env
+
+# Local env / runtime artifacts
+triage_bot/.env
+triage_bot/runtime.md
+triage_bot/journals/
+secretary/journals/
+secretary/codex-secretary-final.txt
+
+# macOS
+.DS_Store

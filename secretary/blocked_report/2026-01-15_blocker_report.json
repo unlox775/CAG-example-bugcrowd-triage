@@ -1,0 +1,32 @@
+{
+  "simple_reply": [
+    {
+      "short_id": "a1b2c3d4",
+      "title": "Reflected input shown in diagnostics panel",
+      "urgency": "~P4",
+      "tldr": "A normal user can reflect harmless text in a diagnostics panel; no state change or data exposure.",
+      "why_blocked": "Needs triage response language.",
+      "researcher_claim": "Researcher marked P2 due to visible input reflection.",
+      "secretary_urgency": "~P4 (informational behavior)",
+      "quick_analysis": "Looks informational and suitable for a short response.",
+      "web": "https://tracker.example.com/submissions/a1b2c3d4",
+      "local": "/tmp/security-sync/blocked/a1b2c3d4.md",
+      "simple_reply_reason": "No exploit chain or sensitive impact; can be resolved with clarification."
+    }
+  ],
+  "pen_test_already_created": [],
+  "analyze_pen_test": [
+    {
+      "short_id": "e5f6a7b8",
+      "title": "Potential authorization bypass in team export endpoint",
+      "urgency": "~P2",
+      "tldr": "A teacher-like role may export another team's data when identifiers are modified.",
+      "why_blocked": "Needs deeper technical validation and reproduction.",
+      "researcher_claim": "Claimed P1 due to possible cross-tenant data exposure.",
+      "secretary_urgency": "~P2 pending confirmation of cross-tenant access.",
+      "quick_analysis": "No existing investigation folder found. Needs full triage run.",
+      "web": "https://tracker.example.com/submissions/e5f6a7b8",
+      "local": "/tmp/security-sync/blocked/e5f6a7b8.md"
+    }
+  ]
+}
