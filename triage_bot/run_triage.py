@@ -54,7 +54,7 @@ def _triage_bot_dir() -> Path:
 
 def _pen_test_root(env: dict[str, str] | None = None) -> Path:
     loaded = env or load_env(_script_dir())
-    default_root = _script_dir().parent
+    default_root = _script_dir().parent / "pentest"
     raw = loaded.get("PENTEST_ROOT", str(default_root))
     p = Path(raw).expanduser()
     if not p.is_absolute():
@@ -194,22 +194,33 @@ def _load_journal_helper():
     return mod
 
 
-def _build_validator_cmd(pentest_folder: Path, env: dict[str, str]) -> list[str]:
+def _build_validator_cmd(
+    pentest_folder: Path,
+    pentest_root: Path,
+    env: dict[str, str],
+) -> list[str]:
     template = (env.get("VALIDATOR_CMD") or "").strip()
     if not template:
         validate_script = _triage_bot_dir() / "validate_pentest.py"
-        return [sys.executable, str(validate_script), str(pentest_folder)]
+        return [
+            sys.executable,
+            str(validate_script),
+            str(pentest_folder),
+            "--pentest-root",
+            str(pentest_root),
+        ]
 
     try:
         rendered = template.format(
             pentest_folder=str(pentest_folder),
             folder=str(pentest_folder),
             triage_bot_dir=str(_triage_bot_dir()),
+            pentest_root=str(pentest_root),
         )
     except KeyError as exc:
         raise ValueError(
             "VALIDATOR_CMD has an unknown placeholder. "
-            "Use {pentest_folder}, {folder}, or {triage_bot_dir}."
+            "Use {pentest_folder}, {folder}, {triage_bot_dir}, or {pentest_root}."
         ) from exc
 
     cmd = shlex.split(rendered)
@@ -237,7 +248,7 @@ def run_validator_and_update(
     pentest_root = _pen_test_root(env)
     merged_env = {**os.environ, **(env or {})}
 
-    validate_cmd = _build_validator_cmd(pentest_folder, merged_env)
+    validate_cmd = _build_validator_cmd(pentest_folder, pentest_root, merged_env)
     if commands_path:
         jh = _load_journal_helper()
         result = jh.run_command_logged(commands_path, validate_cmd, pentest_root, merged_env)

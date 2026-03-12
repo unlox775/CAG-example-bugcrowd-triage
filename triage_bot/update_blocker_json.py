@@ -292,7 +292,7 @@ def cmd_revalidate(args: argparse.Namespace) -> int:
             break
 
     if not pentest_root or not pentest_root.is_dir():
-        fallback = args.env.get("PENTEST_ROOT", str(_script_dir().parent))
+        fallback = args.env.get("PENTEST_ROOT", str(_script_dir().parent / "pentest"))
         pentest_path = Path(fallback).expanduser()
         if not pentest_path.is_absolute():
             pentest_path = _script_dir() / pentest_path

@@ -6,7 +6,7 @@ This standalone repo demonstrates a composite flow:
 2. secretary gate (report validation)
 3. triage gate loop (validation, retries, escalation)
 
-It descends from `dave-style-attempt-1`, where this CAG pattern was first identified as a major process-control breakthrough.
+It descends from `dave-style-attempt-1`, which used this CAG pattern for process control.
 
 ## Pipeline Map
 

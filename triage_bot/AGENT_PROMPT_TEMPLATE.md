@@ -20,11 +20,13 @@ You are triaging one security submission from the blocker report.
 ## Required Workflow
 
 1. Read the local submission at `{{LOCAL}}` first.
-2. Create an investigation folder under `{{PENTEST_ROOT}}` named `YYYY-MM-DD_descriptive-slug`.
+2. Create **exactly one** investigation folder for this item. It **must** be inside the pentest workspace. The pentest workspace path is:
+   **`{{PENTEST_ROOT}}`**
+   Create a new folder there named `YYYY-MM-DD_descriptive-slug` (e.g. `{{PENTEST_ROOT}}/2026-03-11_my-vulnerability-slug`). Do not create the folder in the repository root or anywhere outside this path; validation will fail.
 3. Immediately record the folder so retries can recover state:
 
 ```bash
-python triage_bot/update_blocker_json.py record-pentest-folder --date {{REPORT_DATE}} --short-id {{SHORT_ID}} --runtime-id {{RUNTIME_ID}} --pentest-folder {{PENTEST_ROOT}}/FOLDER_NAME
+python triage_bot/update_blocker_json.py record-pentest-folder --date {{REPORT_DATE}} --short-id {{SHORT_ID}} --runtime-id {{RUNTIME_ID}} --pentest-folder {{PENTEST_ROOT}}/YYYY-MM-DD_descriptive-slug
 ```
 
 4. Complete the investigation output and create the required files in the folder root:
