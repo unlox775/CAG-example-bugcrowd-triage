@@ -83,12 +83,20 @@ make -C triage_bot triage-dry date=2026-01-15 skip_repos=1
 
 ## Repository Layout
 
-- `bugcrowd-sync/`: deterministic BugCrowd API export (upstream input feed)
-- `secretary/`: blocker report generation and report-schema validator gate
-- `triage_bot/`: per-item triage loop with validation-retry-escalation gates
-- `docs/AGENTIC-FLOW.md`: complete CAG flow map and gate contracts
-- `split-out-TODO.md`: split-out checklist and notes
-- `journal_helper.py`: shared journal logging utility
+**BugCrowd sync**
+- `bugcrowd-sync/` — sync tool. `bugcrowd-sync/data/` is where submissions land (new, blocked, etc.).
+
+**Secretary**
+- `secretary/` — agent instructions in `INSTRUCTIONS.md`; output in `blocked_report/`; runtime logs in `secretary/journals/`. `secretary/Makefile` has `make run-agent` to fire Codex.
+
+**Triage bot**
+- `triage_bot/` — agent instructions in `AGENT_PROMPT_TEMPLATE.md`; runtime logs in `triage_bot/journals/` (agent prompts, outputs, validator commands). `triage_bot/Makefile` has `make triage date=YYYY-MM-DD` to fire Codex.
+
+**Outputs**
+- `pentest/` — research folders created by triage (one per submission; gitignored).
+
+**Docs**
+- `docs/AGENTIC-FLOW.md` — full CAG flow map and gate contracts.
 
 ## Pluggability
 
